@@ -1,0 +1,64 @@
+{
+  "name": "simple-immutable-storage",
+  "version": "1.0.1",
+  "description": "Simple immutable storage",
+  "main": "dist/simple-immutable-storage.cjs.js",
+  "types": "dist/index.d.ts",
+  "module": "dist/simple-immutable-storage.esm.js",
+  "sideEffects": false,
+  "author": "Yevhenii Hurynets",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YevheniiGurinets/simple-immutable-storage.git"
+  },
+  "files": [
+    "/dist",
+    "/src"
+  ],
+  "keywords": [
+    "SIS",
+    "simple immutable storage",
+    "storage",
+    "simple storage"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^3.0.0",
+    "@types/jest": "^24.0.18",
+    "@typescript-eslint/eslint-plugin": "^2.0.0",
+    "@typescript-eslint/parser": "^2.0.0",
+    "cross-env": "^5.2.0",
+    "eslint": "6.2.0",
+    "eslint-plugin-jest": "^22.15.1",
+    "jest": "^24.9.0",
+    "rimraf": "3.0.0",
+    "rollup": "^1.19.4",
+    "rollup-plugin-replace": "^2.2.0",
+    "rollup-plugin-terser": "^5.1.1",
+    "rollup-plugin-typescript2": "^0.27.1",
+    "ts-jest": "^24.0.2",
+    "ts-node": "^8.3.0",
+    "tslib": "^1.10.0",
+    "typescript": "^3.9.3"
+  },
+  "config": {},
+  "scripts": {
+    "validate": "yarn lint && yarn typecheck",
+    "test": "yarn jest",
+    "typecheck": "yarn tsc --noEmit",
+    "lint": "yarn lint:eslint",
+    "build": "yarn build:clean && yarn build:dist && yarn build:typescript",
+    "build:clean": "rimraf dist",
+    "build:dist": "rollup -c",
+    "build:typescript": "tsc ./src/index.ts --emitDeclarationOnly --declaration --outDir ./dist",
+    "prepublishOnly": "yarn build"
+  },
+  "bugs": {
+    "url": "https://github.com/YevheniiGurinets/simple-immutable-storage/issues"
+  },
+  "homepage": "https://github.com/YevheniiGurinets/simple-immutable-storage#readme",
+  "directories": {
+    "test": "test"
+  }
+}
