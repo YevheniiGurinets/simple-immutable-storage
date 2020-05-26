@@ -1,4 +1,5 @@
 import createSIS, { SIS } from '../src';
+import { transformToImmutable } from '../src/utils/transformToImmutable'
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 describe('SIS', () => {
@@ -51,3 +52,22 @@ describe('SIS', () => {
     expect(Object.isFrozen(arr[0][0])).toBeTruthy();
   });
 });
+
+describe('utils', () => {
+  it('transformToImmutable should return fully immutable structure', () => {
+    const store: { user: { name: string; skills: string[] } } = {
+      user: {
+        name: 'Yevhenii',
+        skills: ['HTML', 'JS']
+      }
+    };
+
+    const nextStore = transformToImmutable<{ user: { name: string; skills: string[] } }>(store);
+
+    expect(Object.isFrozen(nextStore)).toBeTruthy();
+    expect(Object.isFrozen(nextStore.user)).toBeTruthy();
+    expect(Object.isFrozen(nextStore.user?.skills)).toBeTruthy();
+
+    expect(nextStore).toEqual(store);
+  });
+})

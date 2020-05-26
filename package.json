@@ -1,6 +1,6 @@
 {
   "name": "simple-immutable-storage",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Simple immutable storage",
   "main": "dist/simple-immutable-storage.cjs.js",
   "types": "dist/index.d.ts",

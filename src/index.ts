@@ -1,5 +1,6 @@
 import {  Api  } from './Api'
 import { F, TPath } from './utils/internal';
+import { transformToImmutable } from './utils/transformToImmutable';
 
 export class SIS<T> extends Api {
   constructor() {
@@ -18,11 +19,9 @@ export class SIS<T> extends Api {
   }
 
   // TODO: find a legal way for setting sis proto and fix create method
-  static create<T>(from: any): T & Api {
+  static create<T>(from?: any): T & Api {
     const sis = Object.create(new SIS());
-    const data = { ...from };
-    // @ts-ignore
-    data.__proto__ = sis;
+    const data = Object.assign(sis, transformToImmutable<T>(from));
     return F(data) as T & Api
   }
 }
@@ -44,8 +43,8 @@ export class SIS<T> extends Api {
     return getInOr(path, this, or)
   }
  */
-function createSIS<T> () {
-  return SIS.create<T>({})
+function createSIS<T> (from?: T) {
+  return SIS.create<T>(from)
 }
 
 export default createSIS;
