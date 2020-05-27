@@ -1,6 +1,7 @@
 import { F } from './utils/internal';
 import { setIn } from './utils/setIn';
 import { getInOr } from './utils/getInOr';
+import { merge } from './utils/merge';
 import { TPath } from './utils/internal';
 
 export class Api {
@@ -20,5 +21,8 @@ export class Api {
   public getInOr(path: TPath, or?: unknown) {
     return getInOr(path, this, or)
   }
-}
 
+  public merge(value: object | Array<unknown>, isRecursively: boolean = false) {
+    return merge(this, value, isRecursively)
+  }
+}

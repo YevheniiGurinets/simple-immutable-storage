@@ -46,6 +46,7 @@
   "scripts": {
     "validate": "yarn lint && yarn typecheck",
     "test": "yarn jest",
+    "test:watch": "yarn jest --watch",
     "typecheck": "yarn tsc --noEmit",
     "lint": "yarn lint:eslint",
     "build": "yarn build:clean && yarn build:dist && yarn build:typescript",

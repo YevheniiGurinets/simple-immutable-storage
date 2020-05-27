@@ -18,10 +18,15 @@ export class SIS<T> extends Api {
     return SIS.create<T>(updated)
   }
 
+  public merge(value: object | Array<unknown>, isRecursively?: boolean) {
+    const merged = super.merge(value, isRecursively)
+    return SIS.create<T>(merged)
+  }
+
   // TODO: find a legal way for setting sis proto and fix create method
-  static create<T>(from?: any): T & Api {
+  static create<T>(from?: any, isTransformationNeeded: boolean = false): T & Api {
     const sis = Object.create(new SIS());
-    const data = Object.assign(sis, transformToImmutable<T>(from));
+    const data = Object.assign(sis, isTransformationNeeded ? transformToImmutable<T>(from) : from);
     return F(data) as T & Api
   }
 }
@@ -44,7 +49,7 @@ export class SIS<T> extends Api {
   }
  */
 function createSIS<T> (from?: T) {
-  return SIS.create<T>(from)
+  return SIS.create<T>(from, true)
 }
 
 export default createSIS;
