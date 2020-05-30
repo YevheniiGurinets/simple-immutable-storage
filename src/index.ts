@@ -14,8 +14,8 @@ export class SIS<T> extends Api {
     return SIS.create<T>(updated)
   }
 
-  public merge(value: object | Array<unknown>, isRecursively?: boolean) {
-    const merged = super.merge(value, isRecursively)
+  public merge(value: object | Array<unknown>) {
+    const merged = super.merge(value)
     return SIS.create<T>(merged)
   }
 

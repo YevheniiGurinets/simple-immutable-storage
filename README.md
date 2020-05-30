@@ -2,10 +2,38 @@ TBD
 
 ## Usage
 
+
 ```js
 import createSIS from 'simple-immutable-storage';
 
-// set
+const store = createSIS({
+  user: {
+    name: 'Yevhenii',
+    skills: ['HTML', 'JS'],
+    family: {
+      mother: 'mom',
+      father: 'dad'
+    }
+  }
+});
+
+console.log(store) /*
+{
+  user: {
+    name: 'Yevhenii',
+    skills: ['HTML', 'JS'],
+    family: {
+      mother: 'mom',
+      father: 'dad'
+    }
+  }
+}
+*/
+```
+
+### set
+```js
+import createSIS from 'simple-immutable-storage';
 
 const store = createSIS(); // {}
 
@@ -16,14 +44,14 @@ store === nextStore // false
 const store2 = createSIS();
 const nextStore2 = store2
   .set('key', 1) // { ley: 1 }
-  .set('key2', 3) // { ley: 1, key2: 2 }
+  .set('key2', 2) // { ley: 1, key2: 2 }
   .set('key3', 3); // { ley: 1, key2: 2, key3: 3 }
 ```
 
+### setIn
 ```js
 import createSIS from 'simple-immutable-storage';
 
-// setIn
 const store = createSIS(); // {}
 
 const pathAsAString = 'some.like.string';
@@ -39,10 +67,10 @@ const pathWithNumbers2 = 'some.0.string';
 const nextStore3 = store.setIn(pathWithNumbers2, 1); // { some: [{ string: 1 }] }
 ```
 
+### get / getInOr
 ```js
 import createSIS from 'simple-immutable-storage';
 
-// get / getInOr
 const store = createSIS(); // {}
 
 const nextStore = store
@@ -59,4 +87,65 @@ const surname = nextStore.getInOr(['user', 'surname']); // undefined
 const surname2 = nextStore.getInOr(['user', 'surname'], 'Hurynets'); // Hurynets
 
 const firstSkill = nextStore.getInOr('user.skills.0'); // HTML
+```
+
+### merge
+```js
+import createSIS from 'simple-immutable-storage';
+
+const store = createSIS({ surname: 'Hurynets' }); // { surname: 'Hurynets' }
+const data = {
+    user: {
+         name: 'Yevhenii',
+         skills: ['HTML', 'JS']
+    }
+}
+
+const nextStore = store.merge(data)
+
+console.log(nextStore) /*
+{
+  surname: 'Hurynets',
+  user: {
+    name: 'Yevhenii',
+    skills: ['HTML', 'JS']
+  }
+}
+*/
+
+
+const store2 = createSIS({
+  user: {
+    name: 'Yevhenii',
+    skills: ['HTML', 'JS'],
+    family: {
+      mother: 'mom',
+      father: 'dad'
+    }
+  }
+});
+
+const nextStore2 = merge(store2, {
+  user: {
+    name: 'Yevhenii Hurynets',
+    skills: ['CSS'],
+    family: {
+      brother: 'bro'
+    }
+  }
+});
+
+console.log(nextStore2) /*
+{
+  user: {
+    name: 'Yevhenii Hurynets',
+    skills: ['HTML', 'JS', 'CSS'],
+    family: {
+      mother: 'mom',
+      father: 'dad',
+      brother: 'bro'
+    }
+  }
+}
+*/
 ```

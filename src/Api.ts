@@ -22,7 +22,7 @@ export class Api {
     return getInOr(path, this, or)
   }
 
-  public merge(value: object | Array<unknown>, isRecursively: boolean = false) {
-    return merge(this, value, isRecursively)
+  public merge(value: object | Array<unknown>) {
+    return merge(this, value)
   }
 }
