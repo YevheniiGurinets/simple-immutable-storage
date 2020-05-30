@@ -4,7 +4,7 @@ import { getInOr } from './utils/getInOr';
 import { merge } from './utils/merge';
 import { TPath } from './utils/internal';
 
-export class Api {
+export abstract class Api {
   public set(key: string, value: unknown) {
     return {...this, [key]: F(value)}
   }

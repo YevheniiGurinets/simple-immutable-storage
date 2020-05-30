@@ -4,17 +4,17 @@ import { transformToImmutable } from './utils/transformToImmutable';
 
 export class SIS<T> extends Api {
   // @ts-ignore
-  public set(key: string, value: unknown) {
+  public set(key: string, value: unknown): T & Api {
     const updated = super.set(key, value);
     return SIS.create<T>(updated)
   }
 
-  public setIn(path: TPath, value: unknown) {
+  public setIn(path: TPath, value: unknown): T & Api {
     const updated = super.setIn(path, value)
     return SIS.create<T>(updated)
   }
 
-  public merge(value: object | Array<unknown>) {
+  public merge(value: object): T & Api {
     const merged = super.merge(value)
     return SIS.create<T>(merged)
   }
@@ -27,11 +27,11 @@ export class SIS<T> extends Api {
 }
 
 /**
- * @returns {Object} immutable object with api in th prototype for working with
- * this object
- *
- * set (key, value) {
-    return freeze({...this, [key]: F(value)});
+ * @returns {Object} immutable object that provide a convenient interface for data manipulations
+
+ @example  : existing methods
+ set (key, value) {
+    return {...this, [key]: F(value)};
   },
  setIn (path, value) {
     return setIn(path, value, this)
@@ -41,6 +41,9 @@ export class SIS<T> extends Api {
   },
  getInOr (path, or) {
     return getInOr(path, this, or)
+  },
+ merge(value: object) {
+    return merge(this, value)
   }
  */
 function createSIS<T> (from?: T) {
