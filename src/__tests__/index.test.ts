@@ -1,4 +1,4 @@
-import createSIS, { SIS } from '../src';
+import createSIS, { SIS } from '../index';
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 describe('SIS', () => {

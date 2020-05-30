@@ -4,7 +4,7 @@ export type TPath = string | (string | number)[]
 
 type TFunctionWithPath = (path: TPath, ...rest: any[]) => unknown
 
-const format = (path: TPath): string[] => {
+export const format = (path: TPath): string[] => {
   if (type(path) === TYPES.ARRAY) {
     return (path as string[])
   }

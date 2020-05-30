@@ -3,10 +3,6 @@ import { F, TPath } from './utils/internal';
 import { transformToImmutable } from './utils/transformToImmutable';
 
 export class SIS<T> extends Api {
-  constructor() {
-    super()
-  }
-
   // @ts-ignore
   public set(key: string, value: unknown) {
     const updated = super.set(key, value);
@@ -23,7 +19,6 @@ export class SIS<T> extends Api {
     return SIS.create<T>(merged)
   }
 
-  // TODO: find a legal way for setting sis proto and fix create method
   static create<T>(from?: any, isTransformationNeeded: boolean = false): T & Api {
     const sis = Object.create(new SIS());
     const data = Object.assign(sis, isTransformationNeeded ? transformToImmutable<T>(from) : from);
