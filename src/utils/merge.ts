@@ -25,5 +25,4 @@ export const merge = (target: any, source: any) => {
   }
 
   return F(result)
-  // return F({ ...target, ...transformToImmutable(source) })
 };

@@ -3,6 +3,7 @@ TBD
 ## Usage
 
 
+### create
 ```js
 import createSIS from 'simple-immutable-storage';
 
@@ -54,6 +55,11 @@ import createSIS from 'simple-immutable-storage';
 
 const store = createSIS(); // {}
 
+/*
+String or array could be used as a path.
+All numbers in path will be interpreted as a array indexes.
+*/
+
 const pathAsAString = 'some.like.string';
 const nextStore = store.setIn(pathAsAString, 1); // { some: { like: { string: 1 } } }
 
@@ -80,12 +86,20 @@ const nextStore = store
 
 const user = nextStore.get('user'); // { name: 'Yevhenii', age: 26, skills: ['HTML'] }
 
+/*
+String or array could be used as a path.
+All numbers in path will be interpreted as a array indexes.
+*/
+
+// you can use either string or array as a path
 const name = nextStore.getInOr('user.name'); // Yevhenii
 const name2 = nextStore.getInOr(['user', 'name']); // Yevhenii
 
+// return either undefined or default value 
 const surname = nextStore.getInOr(['user', 'surname']); // undefined
-const surname2 = nextStore.getInOr(['user', 'surname'], 'Hurynets'); // Hurynets
+const surnameWithDefault = nextStore.getInOr(['user', 'surname'], 'Hurynets'); // Hurynets
 
+// getting value from array by index
 const firstSkill = nextStore.getInOr('user.skills.0'); // HTML
 ```
 
@@ -125,6 +139,7 @@ const store2 = createSIS({
   }
 });
 
+// recursively merge same properties
 const nextStore2 = merge(store2, {
   user: {
     name: 'Yevhenii Hurynets',
